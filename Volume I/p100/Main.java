@@ -13,17 +13,17 @@ class Main {
 
 		String line;
 		try {
-	        while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
 				min = max = 0;
-				
-				String REGEX_WHITESPACE = "\\s+";
-            	String cleanLine = line.trim().replaceAll(REGEX_WHITESPACE, " ");
-            	String[] tokens = cleanLine.split(REGEX_WHITESPACE);
 
-            	if (tokens.length == 2) {
-               		min = new Long(tokens[0]).longValue();
-               		max = new Long(tokens[1]).longValue();
-               		long maxCycle = maxCycle(min, max);
+				String REGEX_WHITESPACE = "\\s+";
+				String cleanLine = line.trim().replaceAll(REGEX_WHITESPACE, " ");
+				String[] tokens = cleanLine.split(REGEX_WHITESPACE);
+
+				if (tokens.length == 2) {
+					min = new Long(tokens[0]).longValue();
+					max = new Long(tokens[1]).longValue();
+					long maxCycle = maxCycle(min, max);
 					System.out.println(min + " " + max + " " + maxCycle);
 				}
 			}
@@ -43,7 +43,7 @@ class Main {
 		long maxCycle = -1;
 		for (long a = min; a <= max; a ++) {
 			long m = -1;
-			
+
 			if (a < MAX_SIZE && cache[(int)a] > 0) {
 				m = cache[(int)a];
 			} else {

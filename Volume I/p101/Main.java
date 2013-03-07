@@ -15,16 +15,16 @@ class Main {
 			robotArm = new RobotArm(blocks);
 
 			while ((line = reader.readLine()) != null) {
-            	String cleanLine = line.trim().toLowerCase().replaceAll("\\s+", " ");
-            	String[] tokens = cleanLine.split("\\s+");
+				String cleanLine = line.trim().toLowerCase().replaceAll("\\s+", " ");
+				String[] tokens = cleanLine.split("\\s+");
 
-            	if (!cleanLine.equals("quit") && tokens.length == 4) {
-           			robotArm.addCommand(new Command(tokens));
-            	} else {
-            		robotArm.execute();
-            		robotArm.printPiles();
-            		return;
-           		}
+				if (!cleanLine.equals("quit") && tokens.length == 4) {
+					robotArm.addCommand(new Command(tokens));
+				} else {
+					robotArm.execute();
+					robotArm.printPiles();
+					return;
+				}
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -85,20 +85,20 @@ class RobotArm {
 					current.setCurrentPosition(current.getInitialPosition());
 					dst.push(current);
 					s1.pop();
- 				}
- 				// move all blocks atop B to their original positions
+				}
+				// move all blocks atop B to their original positions
 				while (!s2.empty() && (current = (Block)s2.peek()) != null) {
 					if (current.getInitialPosition() == cmd.b) break;
 					Stack dst = piles[current.getInitialPosition()];
 					current.setCurrentPosition(current.getInitialPosition());
 					dst.push(current);
 					s2.pop();
- 				}
- 				// move A onto B
- 				if (s1.empty()) break;
- 				current = (Block)s1.pop();
- 				current.setCurrentPosition(b.getCurrentPosition());
- 				s2.push(current);
+				}
+				// move A onto B
+				if (s1.empty()) break;
+				current = (Block)s1.pop();
+				current.setCurrentPosition(b.getCurrentPosition());
+				s2.push(current);
 			} else if (cmd.action == Action.MOVE && cmd.placement == Placement.OVER) {
 				// move all blocks atop A to their original positions
 				Block current;
@@ -108,13 +108,13 @@ class RobotArm {
 					current.setCurrentPosition(current.getInitialPosition());
 					dst.push(current);
 					s1.pop();
- 				}
- 				// pot A on top of B
- 				if (s1.empty()) break;
- 				current = (Block)s1.pop();
- 				current.setCurrentPosition(b.getCurrentPosition());
- 				s2.push(current);
- 			} else if (cmd.action == Action.PILE && cmd.placement == Placement.ONTO) {
+				}
+				// pot A on top of B
+				if (s1.empty()) break;
+				current = (Block)s1.pop();
+				current.setCurrentPosition(b.getCurrentPosition());
+				s2.push(current);
+			} else if (cmd.action == Action.PILE && cmd.placement == Placement.ONTO) {
 				// move all blocks atop B to their original positions
 				Block current;
 				while (!s2.empty() && (current = (Block)s2.peek()) != null) {
@@ -123,17 +123,17 @@ class RobotArm {
 					current.setCurrentPosition(current.getInitialPosition());
 					dst.push(current);
 					s2.pop();
- 				}
- 				// add all blocks in A atop B
- 				Stack<Block> tmp = new Stack<Block>();
+				}
+				// add all blocks in A atop B
+				Stack<Block> tmp = new Stack<Block>();
 				while (!s1.empty() && (current = (Block)s1.peek()) != null) {
 					current.setCurrentPosition(b.getCurrentPosition());
 					tmp.push(current);
 					s1.pop();
- 				}
- 				while (!tmp.empty()) {
- 					s2.push(tmp.pop());
- 				}
+				}
+				while (!tmp.empty()) {
+					s2.push(tmp.pop());
+				}
 			} else if (cmd.action == Action.PILE && cmd.placement == Placement.OVER) {
 				// save all blocks atop A until we find A and pile them over B
 				Block current;
@@ -153,10 +153,6 @@ class RobotArm {
 					s2.push(tmp.pop());
 				}
 			}
-			/*
-			System.out.println("############");
-			System.out.println(cmd);
-			printPiles();*/
 		}
 	}
 
