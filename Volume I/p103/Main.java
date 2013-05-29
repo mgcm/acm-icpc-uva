@@ -82,10 +82,8 @@ class Main {
 				 Box b = boxes[i];
 				 int index = i;
 				 int dim = 0;
-				 //System.out.println(b.side(dim));
 				 while (index > 0 && dim < b.getDimensions()) {
-				 	while ( index-1 >= 0 && b.side(dim) < boxes[index-1].side(dim)) {
-				 		//System.out.println(b.side(dim) + " swap " + boxes[index-1].side(dim));
+				 	while (index >= 1 && b.side(dim) < boxes[index-1].side(dim)) {
 				 		boxes[index] = boxes[index-1];
 				 		index --;
 				 	}
@@ -93,13 +91,6 @@ class Main {
 				 	dim ++;
 				 }
 			}
-/*
-			for (int i = 0; i < boxes.length; i++) {
-				Box b = boxes[i];
-				b.printSides();
-				System.out.println();
-			}
-*/
 		}
 
 		public void longestFit(int idx, int nesting) {
